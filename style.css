@@ -884,3 +884,32 @@ section {
         height: 10px;
     }
 }
+
+/* ============================================
+   CORREÇÃO: Unificar cor dos botões no modo escuro
+   - Alguns navegadores móveis alteram cores de links em temas escuros.
+   - Forçamos background e cor do texto para elementos com classe
+     `btn-primary` e `btn-eval`, incluindo propriedade WebKit usada
+     por navegadores baseados em WebKit para preenchimento de texto.
+   ============================================ */
+
+/* Garantir consistência para botões e anchors com .btn-primary */
+.btn-primary,
+a.btn-primary,
+.btn-eval {
+    background: var(--rosa-principal) !important;
+    color: var(--branco) !important;
+    -webkit-text-fill-color: var(--branco) !important;
+    text-decoration: none;
+}
+
+/* Reforçar também no modo escuro do sistema */
+@media (prefers-color-scheme: dark) {
+    .btn-primary,
+    a.btn-primary,
+    .btn-eval {
+        background: var(--rosa-principal) !important;
+        color: var(--branco) !important;
+        -webkit-text-fill-color: var(--branco) !important;
+    }
+}
