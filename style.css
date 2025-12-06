@@ -3,7 +3,7 @@
    ============================================ */
 
 :root {
-    --rosa-principal: #b88775;
+    --rosa-principal: #93645c;
     --rosa-claro: #f6e9e6;
     --dourado: #c9a075;
     --branco: #ffffff;
@@ -65,9 +65,7 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 1.5rem;
-    font-weight: bold;
+    gap: 12px;
     color: var(--rosa-principal);
 }
 
@@ -76,10 +74,30 @@ body {
 }
 
 .logo img {
-    height: 48px;
+    height: 56px;
     width: auto;
     display: block;
     border-radius: 6px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.logo-text .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--rosa-principal);
+}
+
+.logo-text .sub {
+    font-size: 0.95rem;
+    color: #93645c;
+    margin-top: 4px;
+    font-weight: 400;
 }
 
 .nav {
@@ -132,7 +150,7 @@ body {
 
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+                url('assets/Capa.jpeg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -177,12 +195,40 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    height: 48px;
+    line-height: 1;
 }
 
 .btn-primary:hover {
     background: #a36e61;
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(184, 135, 117, 0.4);
+}
+
+/* Botão secundário usado para avaliação externa */
+.btn-eval {
+    background: var(--rosa-principal);
+    color: var(--branco);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    height: 48px;
+    line-height: 1;
+}
+
+.btn-eval:hover {
+    background: #a36e61;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(184, 135, 117, 0.4);
+    color: var(--branco);
 }
 
 /* ============================================
@@ -253,62 +299,23 @@ section {
 }
 
 /* ============================================
-   SOBRE
+   SOBRE (ESTILOS BÁSICOS)
    ============================================ */
 
 .sobre {
     background: var(--cinza-claro);
 }
 
-.sobre-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-}
-
-.sobre-image {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.sobre-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.sobre-text h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
-    color: var(--texto-principal);
-}
-
-.sobre-text p {
+.sobre-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
     color: var(--texto-secundario);
-    margin-bottom: 1rem;
     line-height: 1.8;
 }
 
-.sobre-features {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.feature {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--texto-principal);
-}
-
-.feature i {
-    color: var(--rosa-principal);
-    font-size: 1.2rem;
+.sobre-text p {
+    margin-bottom: 1rem;
 }
 
 /* ============================================
@@ -508,6 +515,184 @@ section {
 }
 
 /* ============================================
+   CARROSSEL SOBRE
+   ============================================ */
+
+.sobre-carousel {
+    position: relative;
+    margin: 3rem auto;
+    max-width: 1000px;
+    overflow: hidden;
+}
+
+.carousel-container {
+    overflow: hidden;
+    border-radius: 15px;
+    margin: 0 50px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 20px;
+    will-change: transform; /* Otimização de performance */
+}
+
+.carousel-slide {
+    min-width: calc(33.333% - 14px);
+    flex: 0 0 calc(33.333% - 14px);
+    padding: 10px;
+}
+
+.sobre-card {
+    background: var(--branco);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sobre-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(184, 135, 117, 0.2);
+}
+
+.sobre-card-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.sobre-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.sobre-card:hover .sobre-card-image img {
+    transform: scale(1.05);
+}
+
+.sobre-card-image img.loading {
+    opacity: 0.7;
+}
+
+.sobre-card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.sobre-card-content h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--rosa-principal);
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+}
+
+.sobre-card-content p {
+    color: var(--texto-secundario);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.sobre-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--texto-principal);
+    font-weight: 500;
+}
+
+.sobre-feature i {
+    color: var(--rosa-principal);
+}
+
+/* Botões de navegação */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--rosa-principal);
+    color: var(--branco);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(184, 135, 117, 0.3);
+}
+
+.carousel-btn:hover {
+    background: #a36e61;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn-prev {
+    left: 0;
+}
+
+.carousel-btn-next {
+    right: 0;
+}
+
+.carousel-btn i {
+    font-size: 1.2rem;
+}
+
+/* Indicadores (pontos) */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 2rem;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--rosa-principal);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.indicator.active {
+    background: var(--rosa-principal);
+    transform: scale(1.2);
+}
+
+.indicator:hover {
+    background: var(--rosa-principal);
+    opacity: 0.7;
+}
+
+/* Texto abaixo do carrossel */
+.sobre-text {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    text-align: center;
+    color: var(--texto-secundario);
+    line-height: 1.8;
+}
+
+.sobre-text p {
+    margin-bottom: 1rem;
+}
+
+/* ============================================
    RESPONSIVIDADE
    ============================================ */
 
@@ -522,6 +707,29 @@ section {
 
     .btn-agendar {
         display: none;
+    }
+
+    /* Menu mobile: quando ativo mostra a lista de links em dropdown */
+    .nav.active {
+        display: flex;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background: var(--branco);
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        z-index: 1100;
+        min-width: 180px;
+    }
+
+    .nav.active a {
+        color: var(--texto-principal);
+        padding: 0.5rem 0.75rem;
+        display: block;
+        font-weight: 600;
     }
 
     .hero {
@@ -540,10 +748,6 @@ section {
         font-size: 2rem;
     }
 
-    .sobre-content {
-        grid-template-columns: 1fr;
-    }
-
     .servicos-grid {
         grid-template-columns: 1fr;
     }
@@ -558,6 +762,42 @@ section {
 
     .footer-content {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Responsividade do carrossel */
+@media (max-width: 992px) {
+    .carousel-slide {
+        min-width: calc(50% - 15px);
+        flex: 0 0 calc(50% - 15px);
+    }
+    
+    .carousel-container {
+        margin: 0 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-slide {
+        min-width: 100%;
+        flex: 0 0 100%;
+    }
+    
+    .carousel-container {
+        margin: 0 30px;
+    }
+    
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .sobre-card-image {
+        height: 180px;
+    }
+    
+    .sobre-carousel {
+        max-width: 90%;
     }
 }
 
@@ -579,8 +819,68 @@ section {
     .depoimento-card {
         padding: 1.5rem;
     }
+    
+    .carousel-container {
+        margin: 0 20px;
+    }
+    
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .carousel-btn-prev {
+        left: -10px;
+    }
+    
+    .carousel-btn-next {
+        right: -10px;
+    }
+    
+    .sobre-card-content {
+        padding: 1.25rem;
+    }
+}
 
-    .sobre-text h2 {
-        font-size: 1.5rem;
+@media (max-width: 360px) {
+    .carousel-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .carousel-btn i {
+        font-size: 1rem;
+    }
+    
+    .sobre-card-content h3 {
+        font-size: 1.1rem;
+    }
+    
+    .sobre-card-content p {
+        font-size: 0.9rem;
+    }
+}
+
+/* ============================================
+   AJUSTES PARA INDICADORES DINÂMICOS
+   ============================================ */
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Ajuste para quando houver muitos indicadores */
+@media (max-width: 480px) {
+    .carousel-indicators {
+        gap: 8px;
+    }
+    
+    .indicator {
+        width: 10px;
+        height: 10px;
     }
 }
