@@ -272,6 +272,100 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializa
     updateIndicators();
     updateCarousel();
+
+    // Touch / Drag support for mobile and pointer devices
+    let isDragging = false;
+    let startPosition = 0;
+    const threshold = 50; // mínimo em px para considerar swipe
+
+    const getSlideWidth = () => slides[0].offsetWidth + 20; // usado no drag
+
+    // --- Touch events (mobile) ---
+    carouselTrack.addEventListener('touchstart', touchStart, { passive: true });
+    carouselTrack.addEventListener('touchmove', touchMove, { passive: true });
+    carouselTrack.addEventListener('touchend', touchEnd);
+
+    function touchStart(e) {
+        if (!e.touches || e.touches.length === 0) return;
+        startPosition = e.touches[0].clientX;
+        isDragging = true;
+        carouselTrack.style.transition = 'none';
+        carouselTrack.classList.add('dragging');
+    }
+
+    function touchMove(e) {
+        if (!isDragging || !e.touches || e.touches.length === 0) return;
+        const currentPosition = e.touches[0].clientX;
+        const diff = currentPosition - startPosition;
+        const base = -currentIndex * getSlideWidth();
+        carouselTrack.style.transform = `translateX(${base + diff}px)`;
+    }
+
+    function touchEnd(e) {
+        if (!isDragging) return;
+        isDragging = false;
+        carouselTrack.style.transition = 'transform 0.5s ease-in-out';
+        carouselTrack.classList.remove('dragging');
+        const endX = (e.changedTouches && e.changedTouches[0] && e.changedTouches[0].clientX) || startPosition;
+        const diff = endX - startPosition;
+        if (Math.abs(diff) > threshold) {
+            if (diff < 0) {
+                goToSlide(currentIndex + 1);
+            } else {
+                goToSlide(currentIndex - 1);
+            }
+        } else {
+            updateCarousel();
+        }
+    }
+
+    // --- Pointer events (mouse / stylus) ---
+    carouselTrack.addEventListener('pointerdown', pointerDown);
+    window.addEventListener('pointerup', pointerUp);
+    carouselTrack.addEventListener('pointermove', pointerMove);
+    carouselTrack.addEventListener('pointerleave', pointerLeave);
+
+    function pointerDown(e) {
+        // apenas botão esquerdo do mouse
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        startPosition = e.clientX;
+        isDragging = true;
+        try { carouselTrack.setPointerCapture(e.pointerId); } catch (err) {}
+        carouselTrack.style.transition = 'none';
+        carouselTrack.classList.add('dragging');
+    }
+
+    function pointerMove(e) {
+        if (!isDragging) return;
+        const currentPosition = e.clientX;
+        const diff = currentPosition - startPosition;
+        const base = -currentIndex * getSlideWidth();
+        carouselTrack.style.transform = `translateX(${base + diff}px)`;
+    }
+
+    function pointerUp(e) {
+        if (!isDragging) return;
+        isDragging = false;
+        try { carouselTrack.releasePointerCapture(e.pointerId); } catch (err) {}
+        carouselTrack.style.transition = 'transform 0.5s ease-in-out';
+        carouselTrack.classList.remove('dragging');
+        const endX = e.clientX || startPosition;
+        const diff = endX - startPosition;
+        if (Math.abs(diff) > threshold) {
+            if (diff < 0) {
+                goToSlide(currentIndex + 1);
+            } else {
+                goToSlide(currentIndex - 1);
+            }
+        } else {
+            updateCarousel();
+        }
+    }
+
+    function pointerLeave(e) {
+        if (!isDragging) return;
+        pointerUp(e);
+    }
 });
 
 // ============================================
@@ -321,4 +415,4 @@ document.addEventListener('DOMContentLoaded', function() {
 // CONSOLE LOG
 // ============================================
 
-console.log('Espaço Mulher Dayane - Site carregado com sucesso!');
+console.log('Dayane Marley - Site carregado com sucesso!');
