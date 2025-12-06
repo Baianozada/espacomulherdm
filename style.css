@@ -311,6 +311,25 @@ section {
     margin-bottom: 1rem;
 }
 
+/* Padroniza imagens dos cards de serviços */
+.servico-icon img,
+.servico-icon .servico-img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .servico-icon img,
+    .servico-icon .servico-img {
+        width: 72px;
+        height: 72px;
+    }
+}
+
 .servico-card h3 {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
