@@ -3,7 +3,7 @@
 // ============================================
 
 const whatsappNumber = "5534997917016";
-const whatsappMessage = "Olá! Gostaria de agendar um atendimento no Espaço Mulher Dayane.";
+const whatsappMessage = "Olá! Gostaria de agendar um atendimento na estética Dayane Marley.";
 
 // ============================================
 // MENU MOBILE
@@ -14,8 +14,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('.nav');
     
     if (menuToggle) {
+        // Alterna classe e atualiza atributo aria-expanded para acessibilidade
         menuToggle.addEventListener('click', function() {
             nav.classList.toggle('active');
+            const expanded = nav.classList.contains('active');
+            menuToggle.setAttribute('aria-expanded', expanded);
+        });
+
+        // Permite abrir/fechar com Enter ou Espaço (acessibilidade teclado)
+        menuToggle.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                menuToggle.click();
+            }
         });
     }
 
@@ -67,7 +78,7 @@ const observer = new IntersectionObserver(function(entries) {
 }, observerOptions);
 
 document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.servico-card, .depoimento-card, .contato-card');
+    const cards = document.querySelectorAll('.servico-card, .depoimento-card, .contato-card, .sobre-card');
     cards.forEach(card => {
         observer.observe(card);
     });
@@ -128,6 +139,183 @@ if ('IntersectionObserver' in window) {
 
     document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
 }
+
+// ============================================
+// CARROSSEL SOBRE (CORRIGIDO COM INDICADORES DINÂMICOS)
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const carouselTrack = document.querySelector('.carousel-track');
+    if (!carouselTrack) return;
+    
+    const slides = Array.from(carouselTrack.children);
+    const nextButton = document.querySelector('.carousel-btn-next');
+    const prevButton = document.querySelector('.carousel-btn-prev');
+    const indicatorsContainer = document.querySelector('.carousel-indicators');
+    
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    
+    // Calcula quantos slides mostrar por vez
+    function getSlidesPerView() {
+        const width = window.innerWidth;
+        if (width <= 768) return 1;
+        if (width <= 992) return 2;
+        return 3;
+    }
+    
+    // Calcula o número de indicadores necessários
+    function getTotalIndicators() {
+        const slidesPerView = getSlidesPerView();
+        // Número de grupos possíveis = totalSlides - slidesPerView + 1
+        // Mas não pode ser menor que 1
+        return Math.max(1, totalSlides - slidesPerView + 1);
+    }
+    
+    // Cria ou atualiza os indicadores
+    function updateIndicators() {
+        const totalIndicators = getTotalIndicators();
+        const currentIndicators = indicatorsContainer.querySelectorAll('.indicator');
+        
+        // Remove indicadores antigos se não forem mais necessários
+        if (currentIndicators.length > totalIndicators) {
+            for (let i = totalIndicators; i < currentIndicators.length; i++) {
+                currentIndicators[i].remove();
+            }
+        }
+        
+        // Adiciona novos indicadores se necessário
+        for (let i = currentIndicators.length; i < totalIndicators; i++) {
+            const indicator = document.createElement('button');
+            indicator.className = 'indicator';
+            indicator.setAttribute('data-slide', i);
+            indicator.setAttribute('aria-label', `Ir para slide ${i + 1}`);
+            
+            if (i === 0) {
+                indicator.classList.add('active');
+            }
+            
+            indicator.addEventListener('click', () => {
+                goToSlide(i);
+            });
+            
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        // Atualiza a classe active
+        const indicators = indicatorsContainer.querySelectorAll('.indicator');
+        indicators.forEach((indicator, i) => {
+            if (i === currentIndex) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+    
+    // Atualiza o carrossel
+    function updateCarousel() {
+        const slidesPerView = getSlidesPerView();
+        const maxIndex = Math.max(0, totalSlides - slidesPerView);
+        
+        // Ajusta o currentIndex se necessário
+        if (currentIndex > maxIndex) {
+            currentIndex = maxIndex;
+        }
+        
+        const slideWidth = slides[0].offsetWidth + 20; // + gap
+        const translateX = -currentIndex * slideWidth;
+        carouselTrack.style.transform = `translateX(${translateX}px)`;
+        
+        updateIndicators();
+    }
+    
+    // Move para um slide específico
+    function goToSlide(index) {
+        const slidesPerView = getSlidesPerView();
+        const maxIndex = Math.max(0, totalSlides - slidesPerView);
+        
+        if (index < 0) {
+            currentIndex = maxIndex;
+        } else if (index > maxIndex) {
+            currentIndex = 0;
+        } else {
+            currentIndex = index;
+        }
+        
+        updateCarousel();
+    }
+    
+    // Event listeners
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            goToSlide(currentIndex + 1);
+        });
+    }
+    
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            goToSlide(currentIndex - 1);
+        });
+    }
+    
+    // Redimensionamento da janela
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateIndicators();
+            updateCarousel();
+        }, 250);
+    });
+    
+    // Inicializa
+    updateIndicators();
+    updateCarousel();
+});
+
+// ============================================
+// MELHORIAS PARA O CARROSSEL
+// ============================================
+
+// Preload de imagens do carrossel para evitar flicker
+function preloadCarouselImages() {
+    const carouselImages = document.querySelectorAll('.sobre-card-image img');
+    carouselImages.forEach(img => {
+        if (!img.complete) {
+            img.classList.add('loading');
+            img.addEventListener('load', function() {
+                this.classList.remove('loading');
+            });
+            // Fallback caso a imagem falhe ao carregar
+            img.addEventListener('error', function() {
+                this.classList.remove('loading');
+                console.warn('Imagem do carrossel não carregou:', this.src);
+            });
+        }
+    });
+}
+
+// Keyboard navigation para o carrossel
+document.addEventListener('keydown', function(e) {
+    const carousel = document.querySelector('.sobre-carousel');
+    if (!carousel) return;
+    
+    // Verifica se o carrossel está visível na tela
+    const carouselRect = carousel.getBoundingClientRect();
+    if (carouselRect.top < window.innerHeight && carouselRect.bottom > 0) {
+        if (e.key === 'ArrowLeft') {
+            document.querySelector('.carousel-btn-prev')?.click();
+        } else if (e.key === 'ArrowRight') {
+            document.querySelector('.carousel-btn-next')?.click();
+        }
+    }
+});
+
+// Inicializa as melhorias quando o DOM carregar
+document.addEventListener('DOMContentLoaded', function() {
+    preloadCarouselImages();
+});
 
 // ============================================
 // CONSOLE LOG
