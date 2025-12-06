@@ -14,6 +14,30 @@
     --texto-secundario: #666666;
 }
 
+/* ============================================
+   CORREÇÃO PARA iOS / DISPOSITIVOS TOUCH
+   - Alguns navegadores móveis (Safari no iPhone) não suportam
+     `background-attachment: fixed` e podem não renderizar o fundo.
+   - Forçamos `background-attachment: scroll` em dispositivos touch
+     e em telas pequenas para garantir que a imagem seja exibida.
+============================================ */
+
+@supports (-webkit-overflow-scrolling: touch) {
+    .hero {
+        background-attachment: scroll !important;
+        -webkit-background-size: cover !important;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        background-attachment: scroll !important;
+        background-position: center center !important;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -536,7 +560,8 @@ section {
     position: relative;
     margin: 3rem auto;
     max-width: 1000px;
-    overflow: hidden;
+    /* Permitir que os botões flutuem fora do contêiner sem serem cortados */
+    overflow: visible;
 }
 
 .carousel-container {
@@ -550,6 +575,19 @@ section {
     transition: transform 0.5s ease-in-out;
     gap: 20px;
     will-change: transform; /* Otimização de performance */
+}
+
+/* Permitir gestures horizontais no carrossel em dispositivos touch
+     - `pan-y` permite o scroll vertical do documento, mas delega o gesto
+         horizontal ao script, evitando que o navegador capture o swipe.
+     - Também desabilita a seleção de texto durante o arraste. */
+.carousel-container,
+.carousel-track,
+.carousel-slide {
+        touch-action: pan-y;
+        -ms-touch-action: pan-y;
+        -webkit-user-select: none;
+        user-select: none;
 }
 
 .carousel-slide {
@@ -642,7 +680,7 @@ section {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 10;
+    z-index: 20;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(184, 135, 117, 0.3);
 }
