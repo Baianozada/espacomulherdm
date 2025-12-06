@@ -17,7 +17,10 @@
         <div class="container">
             <div class="logo">
                 <img src="assets/logo.jpg" alt="Espaço Mulher Dayane" />
-                <span>Espaço Mulher DM</span>
+                <div class="logo-text">
+                    <span class="brand">Dayane Marley</span>
+                    <span class="sub">Espaço estético corporal e facial</span>
+                </div>
             </div>
             <nav class="nav">
                 <a href="#servicos">Serviços</a>
@@ -25,10 +28,7 @@
                 <a href="#depoimentos">Depoimentos</a>
                 <a href="#contato">Contato</a>
             </nav>
-            <a href="https://wa.me/5534997917016" class="btn-agendar" target="_blank" rel="noopener noreferrer" style="text-decoration:none;border-bottom:none;display:inline-flex;align-items:center;color:#fff;">
-                <i class="fab fa-whatsapp" aria-hidden="true" style="color:#fff;"></i>&nbsp;Agendar
-            </a>
-            <div class="menu-toggle">
+            <div class="menu-toggle" aria-label="Abrir menu" role="button" tabindex="0">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
@@ -38,10 +38,13 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Seu Refúgio de Beleza e<br>Bem-Estar</h1>
-            <p>Tratamentos exclusivos para mulheres que cuidam de si mesmas</p>
+            <p>Tratamentos que celebram sua melhor versão</p>
             <button class="btn-primary btn-whatsapp-hero">
                 <i class="fab fa-whatsapp"></i> Marque seu horário
             </button>
+            <a class="btn-primary btn-eval" href="https://share.google/nlTZMRY33VHQcIs3V" target="_blank" rel="noopener">
+                <i class="fas fa-star"></i> Nos avalie!
+            </a>
         </div>
         <div class="hero-overlay"></div>
     </section>
@@ -49,18 +52,18 @@
     <!-- Serviços -->
     <section id="servicos" class="servicos">
         <div class="container">
-            <h2 class="section-title">Nossos Tratamentos</h2>
+            <h2 class="section-title">Alguns de Nossos Serviços</h2>
             <p class="section-subtitle">Cuidados especializados para sua saúde e bem-estar</p>
             <div class="servicos-grid">
                 <div class="servico-card">
-                    <div class="servico-icon">✨</div>
+                    <div class="servico-icon">💆‍♀️</div>
                     <h3>Massagem Modeladora</h3>
                     <p>Redução de medidas e firmeza da pele com técnicas profissionais.</p>
                 </div>
                 <div class="servico-card">
-                    <div class="servico-icon">💆‍♀️</div>
-                    <h3>Massagem Relaxante</h3>
-                    <p>Alívio do stress e tensão muscular em ambiente aconchegador.</p>
+                    <div class="servico-icon">⚡</div>
+                    <h3>Massagem Turbinada</h3>
+                    <p>Massagem intensiva para revitalização completa do corpo.</p>
                 </div>
                 <div class="servico-card">
                     <div class="servico-icon">
@@ -95,29 +98,105 @@
     <!-- Sobre -->
     <section id="sobre" class="sobre">
         <div class="container">
-            <div class="sobre-content">
-                <div class="sobre-image">
-                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Espaço Mulher Dayane">
-                </div>
-                <div class="sobre-text">
-                    <h2>Conheça o Espaço Mulher Dayane Marley</h2>
-                    <p>O Espaço Mulher DM é dedicado a proporcionar uma experiência única de beleza e bem-estar para mulheres que cuidam de si mesmas.</p>
-                    <p>Nossa missão é oferecer tratamentos profissionais, personalizados e acolhedores, em um ambiente que respira tranquilidade e elegância.</p>
-                    <div class="sobre-features">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Profissionais Qualificadas</span>
+            <h2 class="section-title">Conheça nosso espaço</h2>
+            <p class="section-subtitle">Ambiente projetado para seu conforto e bem-estar</p>
+            
+            <div class="sobre-carousel">
+                <!-- Botões de navegação -->
+                <button class="carousel-btn carousel-btn-prev" aria-label="Slide anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <button class="carousel-btn carousel-btn-next" aria-label="Próximo slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <!-- Container do carrossel -->
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide">
+                            <div class="sobre-card">
+                                <div class="sobre-card-image">
+                                    <img src="assets/detox_corporal.png" alt="Espaço interno" loading="lazy">
+                                </div>
+                                <div class="sobre-card-content">
+                                    <h3>Detox Corporal</h3>
+                                    <p>Espaço projetado para oferecer máximo conforto e privacidade durante seus tratamentos.</p>
+                                    <div class="sobre-feature">
+                                        <i class="fas fa-check"></i>
+                                        <span>Decoração acolhedora</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Ambiente Acolhedor</span>
+                        
+                        <!-- Slide 2 -->
+                        <div class="carousel-slide">
+                            <div class="sobre-card">
+                                <div class="sobre-card-image">
+                                    <img src="assets/Drenagem Linfatica.png" alt="Drenagem Linfática" loading="lazy">
+                                </div>
+                                <div class="sobre-card-content">
+                                    <h3>Drenagem Linfática</h3>
+                                    <p>Utilizamos equipamentos modernos e técnicas atualizadas para melhores resultados.</p>
+                                    <div class="sobre-feature">
+                                        <i class="fas fa-check"></i>
+                                        <span>Equipamentos certificados</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Produtos de Qualidade</span>
+                        
+                        <!-- Slide 3 -->
+                        <div class="carousel-slide">
+                            <div class="sobre-card">
+                                <div class="sobre-card-image">
+                                    <img src="assets/massagem turbinada.png" alt="Massagem Turbinada" loading="lazy">
+                                </div>
+                                <div class="sobre-card-content">
+                                    <h3>Massagem Turbinada</h3>
+                                    <p>Cada cliente recebe atenção individualizada e tratamentos adaptados às suas necessidades.</p>
+                                    <div class="sobre-feature">
+                                        <i class="fas fa-check"></i>
+                                        <span>Avaliação personalizada</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 4 -->
+                        <div class="carousel-slide">
+                            <div class="sobre-card">
+                                <div class="sobre-card-image">
+                                    <img src="assets/massagem desportiva.png" alt="Massagem Desportiva" loading="lazy">
+                                </div>
+                                <div class="sobre-card-content">
+                                    <h3>Massagem Desportiva</h3>
+                                    <p>Trabalhamos apenas com produtos de alta qualidade, testados e aprovados dermatologicamente.</p>
+                                    <div class="sobre-feature">
+                                        <i class="fas fa-check"></i>
+                                        <span>Marcas reconhecidas</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Indicadores (pontos) -->
+                <div class="carousel-indicators">
+                    <button class="indicator active" data-slide="0" aria-label="Ir para slide 1"></button>
+                    <button class="indicator" data-slide="1" aria-label="Ir para slide 2"></button>
+                    <button class="indicator" data-slide="2" aria-label="Ir para slide 3"></button>
+                    <button class="indicator" data-slide="3" aria-label="Ir para slide 4"></button>
+                </div>
+            </div>
+            
+            <!-- Texto adicional abaixo do carrossel -->
+            <div class="sobre-text">
+                <p>Somos uma empresa consolidada há mais de 7 anos no mercado, voltada para a área estética, com compromisso em proporcionar uma experiência única de beleza e bem-estar para nossos clientes.</p>
+                <p>Nossa missão é oferecer tratamentos profissionais, personalizados e acolhedores, em um ambiente que respira tranquilidade e elegância.</p>
             </div>
         </div>
     </section>
@@ -136,8 +215,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>"Experiência maravilhosa! Saí do Espaço Mulher Dayane renovada e relaxada."</p>
-                    <strong>Maria Silva</strong>
+                    <p>"Parceria de sucesso, meu bronze ficou top! Carinho, competência e amor pelo que faz."</p>
+                    <strong>Lucilane Aparecida Ribeiro</strong>
                 </div>
                 <div class="depoimento-card">
                     <div class="stars">
@@ -147,8 +226,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>"Profissional muito atenciosa e competente. Voltarei com certeza!"</p>
-                    <strong>Ana Costa</strong>
+                    <p>"Atendimento simplesmente maravilhoso!!!"</p>
+                    <strong>Welliton Barbosa</strong>
                 </div>
                 <div class="depoimento-card">
                     <div class="stars">
@@ -158,8 +237,9 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>"Ambiente perfeito, atendimento impecável. Recomendo!"</p>
-                    <strong>Juliana Santos</strong>
+                    <p>"A melhor massagista desse Uberlândia 😍😍
+Um espaço bem aconchegante e uma recepção maravilhosa! Amo esse lugar 😍"</p>
+                    <strong>Nicolly Souza</strong>
                 </div>
             </div>
         </div>
@@ -174,7 +254,7 @@
                     <h3><i class="fas fa-map-marker-alt"></i> Localização</h3>
                     <div class="map-wrapper">
                         <iframe
-                            src="https://www.google.com/maps?q=Rua+Serra+da+Mantiqueira+698,+São+Jorge,+Uberl%C3%A2ndia,+MG&output=embed"
+                            src="https://www.google.com/maps?q=Rua+Serra+da+Mantiqueira+698,+São+Jorge,+Uberlândia,+MG&output=embed"
                             loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"
                             allowfullscreen>
@@ -206,8 +286,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Espaço Mulher DM</h3>
-                    <p>Seu refúgio de beleza e bem-estar</p>
+                    <div class="logo-text">
+                        <span class="brand">Dayane Marley</span>
+                        <span class="sub">Espaço estético corporal e facial</span>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h3>Redes Sociais</h3>
@@ -226,7 +308,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Espaço Mulher DM. Todos os direitos reservados.</p>
+                <p>&copy; 2025 Dayane Marley Espaço Estético Corporal e Facial. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
