@@ -913,3 +913,34 @@ a.btn-primary,
         -webkit-text-fill-color: var(--branco) !important;
     }
 }
+
+/* Regras adicionais para cobrir estados de link e ajustes automáticos do navegador */
+a.btn-eval,
+a.btn-eval:link,
+a.btn-eval:visited,
+a.btn-eval:hover,
+a.btn-eval:active,
+.btn-primary,
+button.btn-primary {
+    background-color: var(--rosa-principal) !important;
+    background-image: none !important;
+    color: var(--branco) !important;
+    -webkit-text-fill-color: var(--branco) !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    forced-color-adjust: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    border: none !important;
+    box-shadow: 0 10px 25px rgba(184, 135, 117, 0.4) !important;
+}
+
+/* Garantir que pseudo-elementos não causem sobreposição de cor */
+a.btn-eval::after,
+a.btn-eval::before,
+.btn-primary::after,
+.btn-primary::before {
+    background: transparent !important;
+    content: none !important;
+}
